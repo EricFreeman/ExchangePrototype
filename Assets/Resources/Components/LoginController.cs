@@ -1,10 +1,11 @@
 ﻿using Assets.Resources.Services;
+using Assets.Resources.Services.EventAggregator;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Resources.Components
 {
-    public class LoginScreen : MonoBehaviour
+    public class LoginController : MonoBehaviour
     {
         public Text Username;
         public Text Password;
@@ -13,8 +14,9 @@ namespace Assets.Resources.Components
         {
             if (LoginService.Login(Username.text, Password.text))
             {
+                var panel = Instantiate(UnityEngine.Resources.Load("Panels/MainPanel"));
+                EventAggregator.SendMessage(new AddToCanvasMessage { Panel = panel });
                 Destroy(gameObject);
-                Instantiate(UnityEngine.Resources.Load("Resources/Panels/MainPanel"));
             }
             else
             {
