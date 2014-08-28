@@ -10,7 +10,7 @@ namespace Assets.Resources.Components
         public void Handle(AddToCanvasMessage message)
         {
             var p = message.Panel as GameObject;
-            if (p != null) p.transform.parent = Content;
+            if (p != null) p.transform.SetParent(Content, false);
         }
     }
 }
