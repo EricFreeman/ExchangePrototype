@@ -17,7 +17,7 @@ namespace Assets.Resources.Models.Navigation
 
         public void OnClick()
         {
-            EventAggregator.SendMessage(new OpenModalMessage { Modal = "CartPanel" });
+            EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "Panels/CartModal" });
         }
     }
 }

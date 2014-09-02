@@ -18,7 +18,7 @@ namespace Assets.Resources.Models.Navigation
         public void OnClick()
         {
             EventAggregator.SendMessage(new LogoutMessage());
-            EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "LoginPanel" });
+            EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "Panels/LoginPanel" });
         }
     }
 }

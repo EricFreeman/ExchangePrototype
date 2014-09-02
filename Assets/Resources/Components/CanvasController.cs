@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace Assets.Resources.Components
 {
-    public class CanvasController : MonoBehaviour, IListener<AddToCanvasMessage>, IListener<LogoutMessage>
+    public class CanvasController : MonoBehaviour, 
+        IListener<AddToCanvasMessage>, 
+        IListener<LogoutMessage>
     {
         public Transform Content;
 
         public void Handle(AddToCanvasMessage message)
         {
-            var p = (GameObject)Instantiate(UnityEngine.Resources.Load("Panels/" + message.Panel));
-;
+            var p = (GameObject)Instantiate(UnityEngine.Resources.Load(message.Panel));
             if (p != null) p.transform.SetParent(Content, false);
         }
 

@@ -14,7 +14,7 @@ namespace Assets.Resources.Components
         {
             if (LoginService.Login(Username.text, Password.text))
             {
-                EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "MainPanel" });
+                EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "Panels/MainPanel" });
                 Destroy(gameObject);
             }
             else
