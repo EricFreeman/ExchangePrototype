@@ -14,8 +14,7 @@ namespace Assets.Resources.Components
         {
             if (LoginService.Login(Username.text, Password.text))
             {
-                var panel = Instantiate(UnityEngine.Resources.Load("Panels/MainPanel"));
-                EventAggregator.SendMessage(new AddToCanvasMessage { Panel = panel });
+                EventAggregator.SendMessage(new AddToCanvasMessage { Panel = "MainPanel" });
                 Destroy(gameObject);
             }
             else
