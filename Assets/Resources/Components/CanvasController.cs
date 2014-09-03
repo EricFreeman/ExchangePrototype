@@ -1,4 +1,5 @@
-﻿using Assets.Resources.Services.EventAggregator;
+﻿using System.Linq;
+using Assets.Resources.Services.EventAggregator;
 using UnityEngine;
 
 namespace Assets.Resources.Components
@@ -18,6 +19,11 @@ namespace Assets.Resources.Components
 
         public void Handle(ShowModalMessage message)
         {
+            if (Modal.Cast<Transform>().Any())
+            {
+                EventAggregator.SendMessage(new CloseModalMessage());
+                return;
+            }
             AddTo(message.Modal, Modal);
         }
 

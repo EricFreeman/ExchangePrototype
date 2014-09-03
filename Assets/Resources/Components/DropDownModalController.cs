@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Resources.Services.EventAggregator;
+using UnityEngine;
 
 namespace Assets.Resources.Components
 {
-    public class DropDownModalController : MonoBehaviour
+    public class DropDownModalController : MonoBehaviour,
+        IListener<CloseModalMessage>
     {
         private RectTransform _rectTransform;
         private bool _isClosing;
@@ -11,6 +13,7 @@ namespace Assets.Resources.Components
         {
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.anchoredPosition = new Vector2(0, _rectTransform.rect.height);
+            EventAggregator.UpdateCache<CloseModalMessage>();
         }
 
         void Update()
@@ -19,10 +22,20 @@ namespace Assets.Resources.Components
             {
                 _rectTransform.anchoredPosition = Vector2.MoveTowards(_rectTransform.anchoredPosition, Vector2.zero, 3);
             }
-            else if (_isClosing && _rectTransform.anchoredPosition.y <= _rectTransform.rect.height)
+            else if (_isClosing)
             {
                 _rectTransform.anchoredPosition = Vector2.MoveTowards(_rectTransform.anchoredPosition, new Vector2(0, _rectTransform.rect.height), 3);
+
+                if (_isClosing && _rectTransform.position.y >= _rectTransform.rect.height * 2 + 30)
+                {
+                    Destroy(gameObject);
+                }
             }
+        }
+
+        public void Handle(CloseModalMessage message)
+        {
+            _isClosing = true;
         }
     }
 }
