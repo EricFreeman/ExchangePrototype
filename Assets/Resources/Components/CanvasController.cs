@@ -6,25 +6,14 @@ namespace Assets.Resources.Components
 {
     public class CanvasController : MonoBehaviour, 
         IListener<AddToCanvasMessage>,
-        IListener<ShowModalMessage>,
         IListener<LogoutMessage>
     {
         public Transform Content;
-        public Transform Modal;
+        private bool _isModalOpen;
 
         public void Handle(AddToCanvasMessage message)
         {
             AddTo(message.Panel, Content);
-        }
-
-        public void Handle(ShowModalMessage message)
-        {
-            if (Modal.Cast<Transform>().Any())
-            {
-                EventAggregator.SendMessage(new CloseModalMessage());
-                return;
-            }
-            AddTo(message.Modal, Modal);
         }
 
         private void AddTo(string prefab, Transform parent)
@@ -36,9 +25,6 @@ namespace Assets.Resources.Components
         public void Handle(LogoutMessage message)
         {
             foreach (Transform child in Content)
-                DestroyImmediate(child.gameObject);
-
-            foreach (Transform child in Modal)
                 DestroyImmediate(child.gameObject);
         }
     }
