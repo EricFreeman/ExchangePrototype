@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Assets.Resources.Services.EventAggregator;
+﻿using Assets.Resources.Services.EventAggregator;
 using UnityEngine;
 
 namespace Assets.Resources.Components
