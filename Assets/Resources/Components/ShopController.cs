@@ -34,13 +34,11 @@ namespace Assets.Resources.Components
             {
                 var prefab = (GameObject)Instantiate(UnityEngine.Resources.Load("Prefabs/ItemTile"));
                 prefab.GetComponent<ItemTile>().Setup(x);
-
                 prefab.transform.SetParent(ItemList, false);
 
                 var rect = prefab.GetComponent<RectTransform>();
-                var width = rect.rect.xMax;
-                var height = rect.rect.yMax;
-                rect.anchoredPosition = new Vector2(-width, -height);
+                var height = rect.rect.yMin;
+                rect.anchoredPosition = new Vector2(0, index * height);
 
                 index++;
             });
