@@ -20,7 +20,10 @@ namespace Assets.Resources.Components
             {
                 new Item {Name = "Item 1", Price = new decimal(5.55)},
                 new Item {Name = "Item 2", Price = new decimal(8.75)},
-                new Item {Name = "Item 3", Price = new decimal(10.09)}
+                new Item {Name = "Item 3", Price = new decimal(10.09)},
+                new Item {Name = "Item 4", Price = new decimal(2.22)},
+                new Item {Name = "Item 5", Price = new decimal(86.75)},
+                new Item {Name = "Item 6", Price = new decimal(3.09)}
             };
 
             UpdateItemList();
@@ -42,6 +45,8 @@ namespace Assets.Resources.Components
 
                 index++;
             });
+
+            ItemList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, index * 64);
         }
     }
 }
