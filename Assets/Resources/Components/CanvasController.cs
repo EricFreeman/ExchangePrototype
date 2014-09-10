@@ -12,8 +12,14 @@ namespace Assets.Resources.Components
 
         void Start()
         {
-            EventAggregator.UpdateCache<AddToCanvasMessage>();
-            EventAggregator.UpdateCache<LogoutMessage>();
+            this.Register<AddToCanvasMessage>();
+            this.Register<LogoutMessage>();
+        }
+
+        void OnDestroy()
+        {
+            this.UnRegister<AddToCanvasMessage>();
+            this.UnRegister<LogoutMessage>();
         }
 
         public void Handle(AddToCanvasMessage message)

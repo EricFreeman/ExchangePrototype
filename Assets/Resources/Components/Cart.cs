@@ -20,7 +20,12 @@ namespace Assets.Resources.Components
                 tile.GetComponent<ItemTile>().Setup(x, true);
             });
 
-            EventAggregator.UpdateCache<RemoveItemFromCartMessage>();
+            this.Register<RemoveItemFromCartMessage>();
+        }
+
+        void OnDestroy()
+        {
+            this.UnRegister<RemoveItemFromCartMessage>();
         }
 
         public void Handle(RemoveItemFromCartMessage message)

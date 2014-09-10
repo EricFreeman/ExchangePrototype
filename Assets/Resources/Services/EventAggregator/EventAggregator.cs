@@ -34,6 +34,18 @@ namespace Assets.Resources.Services.EventAggregator
             _cache[typeof(T)] = list;
         }
 
+        public static void Register<T>(this object obj)
+        {
+            if(!_cache.ContainsKey(typeof(T))) _cache[typeof(T)] = new List<object>();
+            _cache[typeof(T)].Add(obj);
+        }
+
+        public static void UnRegister<T>(this object obj)
+        {
+            if (!_cache.ContainsKey(typeof (T))) return;
+            _cache[typeof (T)].Remove(obj);
+        }
+
         public static void UpdateCacheAndSendMessage<T>(T message)
         {
             UpdateCache<T>();

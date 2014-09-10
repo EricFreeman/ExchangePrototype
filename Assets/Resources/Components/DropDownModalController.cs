@@ -13,7 +13,13 @@ namespace Assets.Resources.Components
         {
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.anchoredPosition = new Vector2(0, _rectTransform.rect.height);
-            EventAggregator.UpdateCache<CloseModalMessage>();
+
+            this.Register<CloseModalMessage>();
+        }
+
+        void OnDestroy()
+        {
+            this.UnRegister<CloseModalMessage>();
         }
 
         void Update()

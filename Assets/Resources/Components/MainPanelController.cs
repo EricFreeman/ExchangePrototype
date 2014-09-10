@@ -13,8 +13,14 @@ namespace Assets.Resources.Components
 
         void Start()
         {
-            EventAggregator.UpdateCache<OpenScreenMessage>();
-            EventAggregator.UpdateCache<ShowModalMessage>();
+            this.Register<OpenScreenMessage>();
+            this.Register<ShowModalMessage>();
+        }
+
+        void OnDestroy()
+        {
+            this.UnRegister<OpenScreenMessage>();
+            this.UnRegister<ShowModalMessage>();
         }
 
         public void Handle(OpenScreenMessage message)
