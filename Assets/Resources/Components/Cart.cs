@@ -1,10 +1,13 @@
-﻿using Assets.Resources.Models;
+﻿using System.Linq;
+using Assets.Resources.Models;
+using Assets.Resources.Services.EventAggregator;
 using Assets.Resources.Util;
 using UnityEngine;
 
 namespace Assets.Resources.Components
 {
-    public class Cart : MonoBehaviour
+    public class Cart : MonoBehaviour,
+        IListener<RemoveItemFromCartMessage>
     {
         public GameObject ItemTile;
 
@@ -14,8 +17,15 @@ namespace Assets.Resources.Components
             {
                 var tile = (GameObject)Instantiate(ItemTile);
                 tile.transform.SetParent(transform, false);
-                tile.GetComponent<ItemTile>().Setup(x);
+                tile.GetComponent<ItemTile>().Setup(x, true);
             });
+
+            EventAggregator.UpdateCache<RemoveItemFromCartMessage>();
+        }
+
+        public void Handle(RemoveItemFromCartMessage message)
+        {
+            Destroy(GetComponentsInChildren<ItemTile>().First(x => x.Item == message.Item).gameObject);
         }
     }
 }
