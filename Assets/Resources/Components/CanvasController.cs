@@ -10,6 +10,12 @@ namespace Assets.Resources.Components
         public Transform Content;
         private bool _isModalOpen;
 
+        void Start()
+        {
+            EventAggregator.UpdateCache<AddToCanvasMessage>();
+            EventAggregator.UpdateCache<LogoutMessage>();
+        }
+
         public void Handle(AddToCanvasMessage message)
         {
             AddTo(message.Panel, Content);

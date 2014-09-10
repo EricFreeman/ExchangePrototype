@@ -11,6 +11,12 @@ namespace Assets.Resources.Components
         public Transform ContentPanel;
         public bool _isModalOpen;
 
+        void Start()
+        {
+            EventAggregator.UpdateCache<OpenScreenMessage>();
+            EventAggregator.UpdateCache<ShowModalMessage>();
+        }
+
         public void Handle(OpenScreenMessage message)
         {
             // remove current children
