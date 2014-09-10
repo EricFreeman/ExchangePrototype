@@ -44,11 +44,7 @@ namespace Assets.Resources.Components
             }
 
             var p = (GameObject)Instantiate(UnityEngine.Resources.Load(message.Modal));
-            if (p != null)
-            {
-                p.transform.SetParent(transform, false);
-                p.transform.SetSiblingIndex(p.transform.GetSiblingIndex() - 1);
-            }
+            if (p != null) p.transform.SetParent(ContentPanel, false);
             _isModalOpen = true;
         }
     }
