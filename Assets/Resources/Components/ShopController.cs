@@ -46,7 +46,9 @@ namespace Assets.Resources.Components
                 index++;
             });
 
-            ItemList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, index * 64);
+            var r = ItemList.GetComponent<RectTransform>();
+            r.sizeDelta = new Vector2(0, index * 64);
+            r.position = new Vector2(r.position.x, 0);
         }
     }
 }
